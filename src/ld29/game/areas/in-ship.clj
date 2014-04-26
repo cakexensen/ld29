@@ -5,8 +5,21 @@
         [ld29.game.areas.seahorse :only [school-in-ship-door-opened
                                          school-in-ship-door-closed]]))
 
+
+(defentity toilet-brush
+  "A toilet brush"
+  (make-commands [[:look :toilet-brush]
+                  "This is an incredibly sturdy toilet brush. It could even be used as a weapon. "]
+                 [[:get :toilet-brush]
+                  "You snatch that brush up and weild it fiercely. You are a tiger, a lion, a... sea lion? The point is, it makes you feel pretty darn tough. "
+                  (move-entity :toilet-brush :inventory)]))
+
+
+
+
 (defarea in-ship
   "Inside of the weedy ruins of a sunken ship."
+  [toilet-brush]
   (make-commands
    [[:look] "There are plentiful weeds and slimy mosses covering all of the surfaces in here as well."
     (cond

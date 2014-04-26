@@ -1,7 +1,7 @@
 (ns ld29.game.core
   (:use [ld29.game.command]
         [ld29.game.dictionary]
-        [ld29.game.areas main seahorse ship])
+        [ld29.game.areas main seahorse ship shark up wiz cave])
   (:require [ld29.game.uis [title :as title]
                            [game :as game]]))
 
