@@ -1,4 +1,5 @@
-(ns ld29.game.actions)
+(ns ld29.game.actions
+  (:use [clojure.core.incubator]))
 
 ; actions are functions used in command bodies
 ; they are used to easily effect changes on the game state
@@ -46,14 +47,14 @@
                    (get-in state [:inventory] id)
                    (get-in state [:areas from :entities id]))
           ; remove the entity from the 'from' location
-          entity-removed (if from-inventory?
-                           (dissoc state :inventory id)
-                           (dissoc state :areas from :entities id))
+          state (if from-inventory?
+                  (dissoc-in state [:inventory id])
+                  (dissoc-in state [:areas from :entities id]))
           ; add the entity to the 'to' location
-          entity-moved (if to-inventory?
-                         (assoc-in state [:inventory id] entity)
-                         (assoc-in state [:areas to :entities id]))]
-      entity-moved)))
+          state (if to-inventory?
+                  (assoc-in state [:inventory id] entity)
+                  (assoc-in state [:areas to :entities id]))]
+      state)))
 
 ; action conditions - usable inside commands to check the state
 ; use var *state*, which is bound during command processing
