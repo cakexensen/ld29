@@ -5,6 +5,7 @@
 
 (defarea ship
   "Outside of the weedy ruins of a sunken ship."
+  []
   (make-commands
    [[:look] "There are plentiful weeds and slimy mosses covering what looks like it was once a wooden schooner."
     (when (entity-here? :school)

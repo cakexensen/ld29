@@ -4,10 +4,12 @@
         [ld29.game.util]))
 
 (defentity coral
+  "A piece of coral snatched from the ocean floor."
   (make-commands [[:look "coral"] "There are several growths of coral with squiggly reaching tendrils covering the ocean floor"]
                  [[:get "coral"] (if (entity-here? :coral) ["You bury some of the leafy growth in your backpack, it could come in handy?" (move-entity :coral :main :inventory)] "You already plucked enough of this squishy goodness for now.")]))
 
 (defentity corpses
+  ""
   (make-commands [[:look :corpses] "These look kinda fresh, kinda soggy, and quite blue. Misdelivered mail-order babies."]
                  [[:get :corpses] "Those wont fit in your backpack, also they look kinda gross."]))
 

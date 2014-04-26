@@ -12,6 +12,7 @@
   "You see the seahorses gathering by a door on your left. Their insistent bubbles request its opening.")
 
 (defentity school
+  ""
   (make-commands [[:look :school]
                   (case (current-area-id)
                     :seahorse
@@ -29,7 +30,7 @@
                     "They've already gone elsewhere. ")]))
 
 
-(defarea seahorses
+(defarea seahorse
   "A great place for seahorses to gather. "
   [school]
   (make-commands [[:look] (cond

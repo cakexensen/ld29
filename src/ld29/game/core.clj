@@ -1,7 +1,7 @@
 (ns ld29.game.core
   (:use [ld29.game.command]
         [ld29.game.dictionary]
-        [ld29.game.areas.main seahorse ship])
+        [ld29.game.areas main seahorse ship])
   (:require [ld29.game.uis
              [title :as title]
              [game :as game]
@@ -42,7 +42,11 @@
   "processes the state and inputs"
   [{:keys [current-ui uis] :as state} inputs]
   ; get the current ui and execute it
-  ((get uis current-ui) state inputs))
+  (let [state ((get uis current-ui) state inputs)]
+    ; handle game-over reset
+    (if (= state :new-game)
+      (new-game)
+      state)))
 
 (defn continue?
   "determines if the game should continue running"

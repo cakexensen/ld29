@@ -8,8 +8,8 @@
     (animate-message state)
     (let [input (first inputs)]
       (case input
-        \y (new-game)
-        \Y (new-game)
+        \y :new-game
+        \Y :new-game
         \n nil
         \N nil
         (recur state (rest inputs))))))
