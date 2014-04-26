@@ -3,13 +3,6 @@
         [ld29.game.actions]
         [ld29.game.util]))
 
-(defn school-in-ship-door-opened
-  []
-  ["You grab your chin off of the floor as the last seahorse swirls down the drain. Did they just intentionally flush themselves? " (remove-entity :school)])
-
-(defn school-in-ship-door-closed
-  []
-  "You see the seahorses gathering by a door on your left. Their insistent bubbles request its opening.")
 
 (defentity school
   ""
@@ -18,7 +11,7 @@
                     :seahorse
                     ["The seahorses scatter as you get closer. " (move-entity :school :ship)]
                     :ship
-                    ["The seahorses enter the ruin through a splintered hole in the side of the ship. " (move-entity :school :in-ship)]
+                    (school-by-ship)
                     :in-ship
                     (if (get-area-state :door-opened)
                       (school-in-ship-door-opened)
@@ -28,6 +21,18 @@
                   (if (entity-here? :school)
                     ["As you reach out toward the seahorses they scatter in all directions, leaving you all alone. " (move-entity :school :ship)]
                     "They've already gone elsewhere. ")]))
+
+(defn school-in-ship-door-opened
+  []
+  ["You grab your chin off of the floor as the last seahorse swirls down the toilet hole. Did they just intentionally flush themselves? " (remove-entity :school)])
+
+(defn school-in-ship-door-closed
+  []
+  "You see the seahorses gathering by a door on your left. Their insistent bubbles request its opening.")
+
+(defn school-by-ship
+  []
+  ["The seahorses enter the ruin through a splintered hole in the side of the ship. " (move-entity :school :in-ship)])
 
 
 (defarea seahorse
