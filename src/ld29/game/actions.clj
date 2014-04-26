@@ -39,6 +39,17 @@
   (fn [state]
     (assoc-in state [:state key] value)))
 
+(defn remove-entity
+  "removes an entity from the game"
+  ([id]
+     (remove-entity (current-area-id) id))
+  ([area id]
+     (if (= area :inventory)
+       (fn [state]
+         (dissoc-in state [:inventory id]))
+       (fn [state]
+         (dissoc-in state [:areas area :entities id])))))
+
 (defn move-entity
   "moves an entity from one place to another"
   ([id to]
@@ -53,9 +64,7 @@
                       (get-in state [:inventory] id)
                       (get-in state [:areas from :entities id]))
              ; remove the entity from the 'from' location
-             state (if from-inventory?
-                     (dissoc-in state [:inventory id])
-                     (dissoc-in state [:areas from :entities id]))
+             state ((remove-entity from id) state)
              ; add the entity to the 'to' location
              state (if to-inventory?
                      (assoc-in state [:inventory id] entity)
@@ -90,7 +99,7 @@
 (defn current-area-id
   "gets the current area id"
   []
-  (let [{:keys location} *state*]
+  (let [{:keys [location]} *state*]
     location))
 
 (defn entity-at?
