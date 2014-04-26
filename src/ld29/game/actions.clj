@@ -1,5 +1,6 @@
 (ns ld29.game.actions
-  (:use [clojure.core.incubator]))
+  (:use [clojure.core.incubator])
+  (:require [clojure.string :as string]))
 
 ; actions are functions used in command bodies
 ; they are used to easily effect changes on the game state
@@ -95,6 +96,15 @@
   (get-in *state* [:areas area :state key]))
 
 (defn get-game-state
-  "gets a staet value associated with the game"
+  "gets a state value associated with the game"
   [key]
   (get-in *state* [:state key]))
+
+(defn list-inventory
+  "lists the descriptions of all entities in the inventory"
+  []
+  (let [inventory (:inventory *state*)
+        entities (map second inventory) ; skip keys
+        descriptions (map :description entities)
+        description (string/join ", " descriptions)]
+    description))
