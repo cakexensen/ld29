@@ -13,7 +13,7 @@
 (defn clear-screen
   "clears the screen"
   []
-  (.glClearColor (Gdx/gl) 0 0 0 0)
+  (.glClearColor (Gdx/gl) 0.8 0.8 1 0)
   (.glClear (Gdx/gl) GL20/GL_COLOR_BUFFER_BIT))
 
 (defn render
