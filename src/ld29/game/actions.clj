@@ -57,6 +57,12 @@
                   (assoc-in state [:areas to :entities id]))]
       state)))
 
+(defn move-player
+  "moves player to a new area"
+  [to]
+  (fn [state]
+    (assoc-in state [:location state])))
+
 ; action conditions - usable inside commands to check the state
 ; use var *state*, which is bound during command processing
 
