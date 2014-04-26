@@ -4,11 +4,11 @@
 ; (defentity thing (make-commands) state)
 (defmacro defentity
   "defines an entity"
-  ([name commands]
-     `(defentity ~name ~commands {}))
-  ([name commands state]
+  ([name description commands]
+     `(defentity ~name ~description ~commands {}))
+  ([name description commands state]
      `(defn ~name []
-        {:id (keyword '~name) :commands ~commands :state ~state})))
+        {:id (keyword '~name) :description ~description :commands ~commands :state ~state})))
 
 ; (defarea place "description" [entities] (make-commands) state)
 (defmacro defarea
