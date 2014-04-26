@@ -89,12 +89,10 @@
   [inputs rule commands]
   (let [symbols [rule]] ; start symbol stack with the selected rule
     (loop [inputs-symbols [[inputs symbols]]] ; list of input-symbol pairs
-      (clojure.pprint/pprint inputs-symbols)
       (if (empty? inputs-symbols) ; if no more pairs, didn't match
         false
         (let [[inputs symbols] (first inputs-symbols) ; get first pair
               parsed (parse-command-grammar inputs symbols commands)] ; parse it
-          (clojure.pprint/pprint parsed)
           (cond
            ; if coll, still more pairs to parse
            (coll? parsed) (recur (concat (rest inputs-symbols) parsed))
