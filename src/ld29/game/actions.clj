@@ -34,6 +34,27 @@
   (fn [state]
     (assoc-in state [:state key] value)))
 
+(defn move-entity
+  "moves an entity from one place to another"
+  [id from to]
+  (fn [state]
+    (let [; inventory is in a different place than areas, so handle separately
+          from-inventory? (= from :inventory)
+          to-inventory? (= to :inventory)
+          ; retrieve the entity data so we don't lose it
+          entity (if from-inventory?
+                   (get-in state [:inventory] id)
+                   (get-in state [:areas from :entities id]))
+          ; remove the entity from the 'from' location
+          entity-removed (if from-inventory?
+                           (dissoc state :inventory id)
+                           (dissoc state :areas from :entities id))
+          ; add the entity to the 'to' location
+          entity-moved (if to-inventory?
+                         (assoc-in state [:inventory id] entity)
+                         (assoc-in state [:areas to :entities id]))]
+      entity-moved)))
+
 ; action conditions - usable inside commands to check the state
 ; use var *state*, which is bound during command processing
 
@@ -57,27 +78,6 @@
   "checks if an entity is at the current location"
   [id]
   (entity-at? id (:location *state*)))
-
-(defn move-entity
-  "moves an entity from one place to another"
-  [id from to]
-  (let [state *state*
-        ; inventory is in a different place than areas, so handle separately
-        from-inventory? (= from :inventory)
-        to-inventory? (= to :inventory)
-        ; retrieve the entity data so we don't lose it
-        entity (if from-inventory?
-                 (get-in state [:inventory] id)
-                 (get-in state [:areas from :entities id]))
-        ; remove the entity from the 'from' location
-        entity-removed (if from-inventory?
-                         (dissoc state :inventory id)
-                         (dissoc state :areas from :entities id))
-        ; add the entity to the 'to' location
-        entity-moved (if to-inventory?
-                       (assoc-in state [:inventory id] entity)
-                       (assoc-in state [:areas to :entities id]))]
-    entity-moved))
 
 (defn get-entity-state
   "gets a state value associated with a particular entity"
