@@ -112,7 +112,12 @@
 (defn entities->commands
   "extracts and combines the commands from a collection of entities"
   [entities]
-  (let [commands (map :commands entities)
+  (let [entities (if (map? entities)
+                   ; if entities map {:id {entity}}, get the {entity} parts
+                   (map second entities)
+                   ; otherwise entities should be [{entity}]
+                   entities)
+        commands (map :commands entities)
         commands (reduce concat commands)]
     commands))
 
