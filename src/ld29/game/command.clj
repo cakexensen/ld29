@@ -112,7 +112,12 @@
 (defn entities->commands
   "extracts and combines the commands from a collection of entities"
   [entities]
-  (let [commands (map :commands entities)
+  (let [entities (if (map? entities)
+                   ; if entities map {:id {entity}}, get the {entity} parts
+                   (map second entities)
+                   ; otherwise entities should be [{entity}]
+                   entities)
+        commands (map :commands entities)
         commands (reduce concat commands)]
     commands))
 
@@ -129,14 +134,15 @@
   (binding [; bind *state*, used by the action conditions
             *state* state
             ; bind *ns*, because command action fns won't hold their ns
-            *ns* (create-ns 'bsbe.game.actions)]
+            *ns* (create-ns 'ld29.game.actions)]
     (let [; eval actions and convert any that need it
-          parse (comp convert-action eval)
-          parsed-actions (map parse actions)
-          parsed-actions (filter (comp not nil?) parsed-actions)
-          parsed-actions (reverse parsed-actions) ; reverse before comping
+          actions (map eval actions)
+          actions (flatten actions)
+          actions (map convert-action actions)
+          actions (filter (comp not nil?) actions)
+          actions (reverse actions) ; reverse before comping
           ; reduce actions into a single state->state action
-          action (apply comp parsed-actions)]
+          action (apply comp actions)]
       action)))
 
 (defn process-command
