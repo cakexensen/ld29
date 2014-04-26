@@ -27,9 +27,11 @@
 
 (defn set-area-state
   "sets a state value associated with a particular area"
-  [area key value]
-  (fn [state]
-    (assoc-in state [:areas area :state key] value)))
+  ([key value]
+     (set-area-state (current-area-id) key value))
+  ([area key value]
+     (fn [state]
+       (assoc-in state [:areas area :state key] value))))
 
 (defn set-game-state
   "sets a state value associated with the entire game"
@@ -115,8 +117,10 @@
 
 (defn get-area-state
   "gets a state value associated with a particular area"
-  [area key]
-  (get-in *state* [:areas area :state key]))
+  ([key]
+     (get-area-state (current-area-id) key))
+  ([area key]
+     (get-in *state* [:areas area :state key])))
 
 (defn get-game-state
   "gets a state value associated with the game"
