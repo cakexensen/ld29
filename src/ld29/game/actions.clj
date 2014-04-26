@@ -66,6 +66,14 @@
   (fn [state]
     (assoc-in state [:location state])))
 
+(defn game-over
+  "causes a game over"
+  [message]
+  (fn [state]
+    (-> state
+        (assoc-in [:message] (str message " Would you like to restart? y/n"))
+        (assoc-in [:current-ui] :game-over))))
+
 ; action conditions - usable inside commands to check the state
 ; use var *state*, which is bound during command processing
 
