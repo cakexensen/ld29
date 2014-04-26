@@ -129,7 +129,7 @@
   (binding [; bind *state*, used by the action conditions
             *state* state
             ; bind *ns*, because command action fns won't hold their ns
-            *ns* (create-ns 'bsbe.game.actions)]
+            *ns* (create-ns 'ld29.game.actions)]
     (let [; eval actions and convert any that need it
           parse (comp convert-action eval)
           parsed-actions (map parse actions)
