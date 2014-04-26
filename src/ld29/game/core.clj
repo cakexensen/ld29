@@ -1,6 +1,7 @@
 (ns ld29.game.core
   (:use [ld29.game.command]
-        [ld29.game.dictionary])
+        [ld29.game.dictionary]
+        [ld29.game.areas.main])
   (:require [ld29.game.uis [title :as title]
                            [game :as game]]))
 
@@ -16,8 +17,8 @@
    :animated-message "" ; the partially-animated portion of the message
    :animated-index 0 ; the animation index
    :state {} ; any global state values
-   :areas {} ; all the areas in the game
-   :location nil ; the current area id
+   :areas {:main (main)} ; all the areas in the game
+   :location :main ; the current area id
    :inventory {} ; player's inventory of entities
    :dictionary (make-dictionary) ; dictionary shared throughout game
    :unknown-command (fn [state]
