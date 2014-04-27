@@ -7,8 +7,8 @@
 (def style
   (delay ; delay because creating LabelStyle at compile time fails
    (Label$LabelStyle.
-    (BitmapFont. (.internal (LwjglFiles.) "unifont-32.fnt") false)
-    (Color. 1 1 1 1))))
+    (BitmapFont. (.internal (LwjglFiles.) "ume-mincho-32.fnt") false)
+    (Color. 0.2 0.2 0.8 1))))
 
 (def max-line-length 48)
 

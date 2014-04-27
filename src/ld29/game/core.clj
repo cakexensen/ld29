@@ -2,15 +2,18 @@
   (:use [ld29.game.command]
         [ld29.game.dictionary]
         [ld29.game.areas main seahorse ship shark up wiz cave])
-  (:require [ld29.game.uis [title :as title]
-                           [game :as game]]))
+  (:require [ld29.game.uis
+             [title :as title]
+             [game :as game]
+             [game-over :as game-over]]))
 
 (defn new-game
   "creates a new game state"
   []
   {:current-ui :title ; the current ui to use
    :uis {:title title/process-state
-         :game game/process-state} ; all the uis in the game
+         :game game/process-state
+         :game-over game-over/process-state} ; all the uis in the game
    :partial-input [] ; the input the player is still typing
    :input "" ; the input after player hits enter
    :message "" ; the message to display on the screen
@@ -39,7 +42,11 @@
   "processes the state and inputs"
   [{:keys [current-ui uis] :as state} inputs]
   ; get the current ui and execute it
-  ((get uis current-ui) state inputs))
+  (let [state ((get uis current-ui) state inputs)]
+    ; handle game-over reset
+    (if (= state :new-game)
+      (new-game)
+      state)))
 
 (defn continue?
   "determines if the game should continue running"

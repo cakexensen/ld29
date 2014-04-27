@@ -35,7 +35,7 @@
   ["The seahorses enter the ruin through a splintered hole in the side of the ship. " (move-entity :school :in-ship)])
 
 
-(defarea seahorses
+(defarea seahorse
   "A great place for seahorses to gather. "
   [school]
   (make-commands [[:look] (cond
