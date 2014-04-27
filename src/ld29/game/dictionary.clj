@@ -48,4 +48,6 @@
    [:about ["about" | nil]]
    [:favour ["favor" | "favour" | "quest" | "task" | "chore"]]
    [:removing ["removing" | "to" "remove" | nil]]
+   [:beg ["beg" | "please" | "demand"]]
+   [:nicely ["nicely"]]
    ))
