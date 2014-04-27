@@ -43,4 +43,13 @@
                   (battle-vs-shark-man)
                   (when (entity-here? :seal)
                     [ "The slippery seal sneaks away to the north. "
-                      (move-entity :seal :ship)])]))
+                      (move-entity :seal :ship)])]
+                 [[:look :north]
+                  "You see the mossy sunken ship back the way you came from."]
+                 [[:look :west]
+                  "You see a well-kept cottage."]
+                 [[:go :north]
+                  (move-player :ship)]
+                 [[:go :west]
+                  (move-player :house)]
+                 ))

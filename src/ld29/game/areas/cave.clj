@@ -70,8 +70,19 @@
 (defarea cave
   "A cave near the shipwreck."
   [marlune]
-  (make-commands [
-                  [:look]
-                  "A cold cavern is cut from the cliffside in this area. "
-                  (when (entity-here? marlune)
-                    "There is a mermaid leaning against the wall with her arms crossed over her chest. ")]))
+  (make-commands
+   [[:look]
+    "A cold cavern is cut from the cliffside in this area. "
+    (when (entity-here? marlune)
+      "There is a mermaid leaning against the wall with her arms crossed over her chest. ")]
+   [[:look :south]
+    "You see that mucked up sunken ship."]
+   [[:look :west]
+    (if (entity-at? :school :seahorse)
+      "You see a school of seahorses that way."
+      "There's not much over there now.")]
+   [[:go :south]
+    (move-player :ship)]
+   [[:go :west]
+    (move-player :seahorse)]
+   ))
