@@ -7,8 +7,10 @@
   (:import [com.badlogic.gdx Game Gdx Screen InputProcessor]
            [com.badlogic.gdx.graphics GL20]
            [com.badlogic.gdx.scenes.scene2d Stage])
-  (:require [ld29.gui.uis [title :as title]
-                          [game :as game]]))
+  (:require [ld29.gui.uis
+             [title :as title]
+             [game :as game]
+             [game-over :as game-over]]))
 
 (defn clear-screen
   "clears the screen"
@@ -64,7 +66,8 @@
   [[] {:state shared-state
        :inputs shared-inputs
        :uis {:title title/render
-             :game game/render}}])
+             :game game/render
+             :game-over game-over/render}}])
 
 (defn -create [^Game this]
   ; set up screen, input listener
