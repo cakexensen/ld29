@@ -5,6 +5,7 @@
   "creates the game dictionary"
   []
   (make-command-dictionary
+   [:backpack ["backpack" | "inventory" | "items" | "stuff"]]
    [:look ["look" | "view" | "examine" | "inspect" | "check" "out" | "perceive"]]
    [:look-at [:look | "look" "at"]]
    [:get ["get" | "take" | "acquire" | "attain"]]

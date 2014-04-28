@@ -34,6 +34,9 @@
            :village (village)} ; all the areas in the game
    :location :main ; the current area id
    :inventory {} ; player's inventory of entities
+   :commands (make-commands [[:look :backpack]
+                             "This backpack is one of your favourite possessions. It is a deluxe starfish backpack with premium eel stitching. Current contents: "
+                             (list-inventory)])
    :dictionary (make-dictionary) ; dictionary shared throughout game
    :unknown-command (fn [state]
                       (assoc-in state [:message]
