@@ -34,7 +34,7 @@
     (if (get-game-state :all-clear)
       (move-player :cave)
       "It's too murky to go that way right now.")]
-   [[:go :ship]
+   [[:go :into :ship | "enter" :the :ship]
     (move-player :in-ship)]
    [[:look :west]
     (if (entity-at? :thugs :main)
