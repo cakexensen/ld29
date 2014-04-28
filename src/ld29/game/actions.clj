@@ -16,7 +16,7 @@
 
 (defn set-entity-state
   "sets a state value associated with a particular entity"
-  ([area entity key value]
+  ([entity area key value]
      (if (= area :inventory)
        (fn [state]
          (assoc-in state [:inventory entity :state key] value))
@@ -43,7 +43,7 @@
   "removes an entity from the game"
   ([id]
      (remove-entity (current-area-id) id))
-  ([area id]
+  ([id area]
      (if (= area :inventory)
        (fn [state]
          (dissoc-in state [:inventory id]))
@@ -117,7 +117,7 @@
 
 (defn get-entity-state
   "gets a state value associated with a particular entity"
-  ([area entity key]
+  ([entity area key]
      (if (= area :inventory)
        (get-in *state* [:inventory entity :state key])
        (get-in *state* [:areas area :entities entity :state key])))
