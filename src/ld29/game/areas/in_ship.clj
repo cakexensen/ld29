@@ -30,15 +30,15 @@
    [[:look | :look :latrine] "There are plentiful weeds and slimy mosses covering all of the surfaces in here as well. They don't look like they'd be as easy to grab up though."
     (cond
      (and (get-area-state :door-opened) (entity-here? :school))
-     (school-in-ship-door-opened)
+     `(school-in-ship-door-opened)
      (entity-here? :school)
-     (school-in-ship-door-closed)
+     `(school-in-ship-door-closed)
      (and (get-area-state :door-opened) (entity-here? :toilet-brush))
      "All that's left in the latrine is the toilet brush."
      :else
      "There is nothing left here."
      )]
    [[:open :door] "As you open the door the silly seahorses begin storming down the drain of the latrine you just accessed for them. "(set-area-state :door-opened true)]
-   [[:leave | :leave :ship |:go |:go :west]
+   [[:leave | :leave :ship | :go | :go :west]
     (move-player :ship)]
    ))

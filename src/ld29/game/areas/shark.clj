@@ -6,11 +6,11 @@
 (defentity shark-man
   ""
   (make-commands [[:look :shark-man]
-                  (battle-vs-shark-man)]
+                  `(battle-vs-shark-man)]
                  [[:battle :shark-man]
-                  (battle-vs-shark-man)]
+                  `(battle-vs-shark-man)]
                  [[:get :shark-man]
-                  (battle-vs-shark-man)]))
+                  `(battle-vs-shark-man)]))
 
 
 (defn win-vs-shark-man
@@ -27,8 +27,8 @@
 (defn battle-vs-shark-man
   []
   (if (entity-at? :toilet-brush :inventory)
-   (win-vs-shark-man)
-   (lose-vs-shark-man)))
+   `(win-vs-shark-man)
+   `(lose-vs-shark-man)))
 
 
 
@@ -38,7 +38,7 @@
   [shark-man]
   (make-commands [[:look]
                   (when (entity-here? :shark-man)
-                      (battle-vs-shark-man))
+                      `(battle-vs-shark-man))
                   (when (entity-here? :seal)
                     [ "The slippery seal sneaks away to the north."
                       (move-entity :seal :ship)])]
