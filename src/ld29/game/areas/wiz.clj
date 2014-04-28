@@ -25,11 +25,13 @@
                   "\"Ah, how curious to see not just a human in my midst, but one blessed with gills!\" *fart* \"Would you be interested in doing me a little favour?\""
                   (set-entity-state :wizard :talked true)]
                  [[:ask :about :favour | :ask :wizard :about :favour]
-                  (if (get-area-state :shark :slime)
-                    "\"Thanks for sliming that sharkman's place!\" *fart* \"Oh, I'd love to see the look on his face...\""
-                    (if (get-entity-state :wizard :talked)
-                      "*fart* \"Could you please take some slime from the sunken ship and spread it around the sharkman's hideout?\" *fart* \"He's been really getting on my nerves lately!\""
-                      "\"I don't think I mentioned a favour, but since you're interested,\" *fart* \"take some slime from the sunken ship and spread it around the sharkman's hideout. He's been really getting on my nerves lately!\""))]
+                  (cond
+                   (get-game-state :slime)
+                   "\"Thanks for sliming that sharkman's place!\" *fart* \"Oh, I'd love to see the look on his face...\""
+                   (get-entity-state :wizard :talked)
+                   "*fart* \"Could you please take some slime from the sunken ship and spread it around the sharkman's hideout?\" *fart* \"He's been really getting on my nerves lately!\""
+                   :else
+                   "\"I don't think I mentioned a favour, but since you're interested,\" *fart* \"take some slime from the sunken ship and spread it around the sharkman's hideout. He's been really getting on my nerves lately!\"")]
                  [[:ask :about :removing :gills | :ask :wizard :about :removing :gills]
                   (let [begged (get-entity-state :wizard :begged)]
                     (gill-removal-dialogue begged)
