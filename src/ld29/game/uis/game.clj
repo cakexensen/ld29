@@ -27,9 +27,11 @@
   [state inputs]
   (let [state (process-inputs state inputs)
         input-available (not (empty? (:input state)))
-        processed-state (if input-available
-                          (process-command state)
-                          state)
-        animated-state (animate-message processed-state)]
-    animated-state))
+        state (if input-available
+                (process-command state)
+                state)
+        state (animate-message state)
+        ; play music - just this one track throughout game
+        state (assoc-in state [:current-music] :ambient-b)]
+    state))
 

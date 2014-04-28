@@ -10,7 +10,7 @@
     (BitmapFont. (.internal (LwjglFiles.) "ume-mincho-32.fnt") false)
     (Color. 0.2 0.2 0.8 1))))
 
-(def max-line-length 48)
+(def max-line-length 50)
 
 (def line-pixel-height 32)
 
@@ -33,7 +33,7 @@
   "wraps the message to fit the screen"
   [message stage]
   (loop [message message
-         line-number 1] ; start 1 line under the top
+         line-number 2] ; start 2 line under the top
     (let [[line rest] (split-at max-line-length message)
           [line rest] (adjust-for-split-word line rest)
           line-label (Label. (apply str line) @style)]

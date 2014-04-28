@@ -10,13 +10,33 @@
   (:require [ld29.gui.uis
              [title :as title]
              [game :as game]
-             [game-over :as game-over]]))
+             [game-over :as game-over]])
+  (:use [ld29.gui.music]))
 
 (defn clear-screen
   "clears the screen"
   []
   (.glClearColor (Gdx/gl) 0.8 0.8 1 0)
   (.glClear (Gdx/gl) GL20/GL_COLOR_BUFFER_BIT))
+
+(defn play-music
+  "plays/changes the music"
+  [{:keys [current-music music-instance musics state]}]
+  (let [state @state ; deref game state
+        state-music (:current-music state) ; music according to game
+        ]
+    ; if we aren't playing the music we should be playing
+    (when-not (= state-music @current-music)
+      ; update current music identifier
+      (swap! current-music (fn [_] state-music))
+      ; stop the current music if available
+      (kill-music @music-instance)
+      ; get the new music
+      (let [music (new-music (get musics state-music))]
+        ; update it in state
+        (swap! music-instance (fn [_] music))
+        ; play it
+        (.play music)))))
 
 (defn render
   "renders the current ui"
@@ -26,7 +46,7 @@
 
 (defn make-screen
   "creates the screen for displaying stuff"
-  [state uis]
+  [state]
   (let [stage (atom nil)]
     (proxy [Screen] []
       (resize [w h])
@@ -35,13 +55,16 @@
       (render [delta]
         (clear-screen)
         (reset! stage (Stage.))
+        ; play the music
+        (play-music state)
         ; render the game state
-        (render stage @state uis)
+        (render stage @(:state state) (:uis state))
         (doto @stage
           (.act delta)
           (.draw)))
       (pause [])
-      (dispose [])
+      (dispose []
+        (kill-music @(:music-instance state)))
       (resume []))))
 
 (defn make-input-listener
@@ -67,10 +90,14 @@
        :inputs shared-inputs
        :uis {:title title/render
              :game game/render
-             :game-over game-over/render}}])
+             :game-over game-over/render}
+       :current-music (atom nil) ; the music currently playing
+       :music-instance (atom nil) ; the Music object for the current music
+       :musics {:ambient-b "ambient_b_eastern_thought.mp3"} ; music -> filename
+       }])
 
 (defn -create [^Game this]
   ; set up screen, input listener
   (let [state (.state this)]
-    (.setScreen this (make-screen (:state state) (:uis state)))
+    (.setScreen this (make-screen state))
     (.setInputProcessor Gdx/input (make-input-listener (:inputs state)))))

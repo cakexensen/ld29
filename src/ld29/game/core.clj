@@ -25,8 +25,9 @@
    :inventory {} ; player's inventory of entities
    :dictionary (make-dictionary) ; dictionary shared throughout game
    :unknown-command (fn [state]
-                      (assoc-in state [:message] (str "You can't " (:input state)); error message here
-                                ))
+                      (assoc-in state [:message]
+                                (str "You can't " (:input state))))
+   :current-music nil ; the song to play currently
    })
 
 (defn get-inputs
