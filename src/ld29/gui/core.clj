@@ -12,7 +12,7 @@
   "runs the gui application"
   [shared-state shared-inputs window-title window-width window-height]
   ; create the game application
-  (let [game (ld29.gui.Game. shared-state shared-inputs window-width window-height)
+  (let [game (ld29.gui.Game. shared-state shared-inputs)
         config (LwjglApplicationConfiguration.)]
     ; disgustingly set the configuration parameters
     (set! (. config resizable) false)
