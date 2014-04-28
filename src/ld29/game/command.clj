@@ -132,9 +132,10 @@
   "parses actions into a single state->state fn"
   [state actions]
   (binding [; bind *state*, used by the action conditions
-            *state* state
-            ; bind *ns*, because command action fns won't hold their ns
-            *ns* (create-ns 'ld29.game.actions)]
+            *state* state]
+    ; include relevant namespaces to process the actions
+    (use 'ld29.game.actions)
+    (use (symbol (str "ld29.game.areas." (name (:location state)))))
     (let [; eval actions and convert any that need it
           actions (map eval actions)
           actions (flatten actions)
