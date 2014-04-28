@@ -88,7 +88,9 @@
   "moves player to a new area"
   [to]
   (fn [state]
-    (assoc-in state [:location state])))
+    (-> state
+        (assoc-in [:location] to)
+        (assoc-in [:input] "look"))))
 
 (defn game-over
   "causes a game over"
