@@ -6,7 +6,9 @@
 (defn new-music
   "creates a new Music"
   [music-file]
-  (.newMusic Gdx/audio (.internal (LwjglFiles.) music-file)))
+  (let [music (.newMusic Gdx/audio (.internal (LwjglFiles.) music-file))]
+    (.setLooping music true)
+    music))
 
 (defn kill-music
   "kills a Music instance"
