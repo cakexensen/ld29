@@ -27,7 +27,7 @@
   "Inside of the weedy ruins of a sunken ship."
   [toilet-brush]
   (make-commands
-   [[:look | :look :latrine] "There are plentiful weeds and slimy mosses covering all of the surfaces in here as well. They don't look like they'd be as easy to grab up though."
+   [[:look] "There are plentiful weeds and slimy mosses covering all of the surfaces in here as well. They don't look like they'd be as easy to grab up though."
     (cond
      (and (get-area-state :door-opened) (entity-here? :school))
      (school-in-ship-door-opened)
@@ -38,6 +38,12 @@
      :else
      "There is nothing left here."
      )]
+   [[:look :latrine]
+    (cond
+     (and (get-area-state :door-opened) (entity-here? :toilet-brush))
+     "All that's left in the latrine is the toilet brush."
+     (get-area-state :door-opened)
+     "There is nothing left here")]
    [[:open :door] "As you open the door the silly seahorses begin storming down the drain of the latrine you just accessed for them. "(set-area-state :door-opened true)]
    [[:leave | :leave :ship | :go | :go :west]
     (move-player :ship)]

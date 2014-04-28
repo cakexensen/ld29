@@ -19,9 +19,13 @@
   [seal]
   (make-commands
    [[:look]
-    (if (entity-here? :seal)
-      ["You come to an adorable underwater cottage-style home complete with a well-manicured lawn. You see a silly seal sashaying eastward." (move-entity :seal :shark)]
-      "You come to an adorable underwater cottage-style home complete with a well-manicured lawn.")]
+    (cond
+     (entity-here? :seal)
+     ["You come to an adorable underwater cottage-style home complete with a well-manicured lawn. You see a silly seal sashaying eastward." (move-entity :seal :shark)]
+     (entity-here? :marlune)
+     "The mermaid that you returned the top to is here. She says \"Hi! Sorry I ran off before. I just remembered I left my oven on...\"" 
+     :else
+     "You come to an adorable underwater cottage-style home complete with a well-manicured lawn.")]
    [[:look :east]
     "You see the area where the shark-man once stood. You get the feeling he mugs people there often."
     (when (entity-at? :seal :shark)

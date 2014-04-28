@@ -51,7 +51,7 @@
      ["\"Oh, hey, you have my top! Can I have it back?\"" (set-entity-state :marlune :asked-for-top-back true)]
      :else
      "\"Right... it was stolen by some thugs.\"")]
-   [[:give :top | :give :top :to :mermaid | :give :top :to :marlune]
+   [[:give :top | :give :top :to :mermaid | :give :top :to "marlune"]
     (if (entity-at? :top :inventory)
       [ "\"My top! Thank you very much!\" The mermaid quickly grabs the top from you and puts it on."
         (remove-entity :top :inventory)
@@ -93,7 +93,7 @@
   (make-commands
    [[:look]
     "A cold cavern is cut from the cliffside in this area. "
-    (when (entity-here? marlune)
+    (when (entity-here? :marlune)
       "There is a mermaid leaning against the wall with her arms crossed over her chest. ")]
    [[:look :south]
     "You see that mucked up sunken ship."]

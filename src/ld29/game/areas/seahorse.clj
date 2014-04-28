@@ -26,7 +26,7 @@
 
 (defn school-in-ship-door-opened
   []
-  ["You grab your chin off of the floor as the last seahorse swirls down the toilet hole. Did they just intentionally flush themselves? " (remove-entity :school)])
+  ["You grab your chin off of the floor as the last seahorse swirls down the toilet hole. Did they just intentionally flush themselves? You happen to notice a very sturdy-looking toilet brush in the latrine." (remove-entity :school)])
 
 (defn school-in-ship-door-closed
   []

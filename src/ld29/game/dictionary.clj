@@ -63,4 +63,5 @@
    [:front ["front" | nil]]
    [:leave ["exit" | "leave" | "abscond" | :go :out | :go :out :the :front :door | :go "through" :the :front :door]]
    [:use ["use" | "spread" | "dump" | "dump" "out"]]
+   [:give ["give" | "give" :top "to" :mermaid | "give" :top :mermaid ]]
    ))
