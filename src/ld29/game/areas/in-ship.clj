@@ -39,4 +39,6 @@
      "There is nothing left here."
      )]
    [[:open :door] "As you open the door the silly seahorses begin storming down the drain of the latrine you just accessed for them. "(set-area-state :door-opened true)]
+   [[:leave | :leave :ship |:go |:go :west]
+    (move-player :ship)]
    ))
