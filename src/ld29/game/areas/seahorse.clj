@@ -46,11 +46,12 @@
     (cond
      (entity-here? :school)
      "You watch the seahorses from a distance. They awkwardly bob up and down at irregular intervals, as though each one is in step with a different song. "
-     (entity-here? :seal)
-     "A silly seal smiles. "
-     :else "The seahorses seem to've departed. There's not much here. ")]
+     (entity-here? :teenager)
+     "That teenage mermaid that kicked you in the sack is here."
+     :else
+     "The seahorses seem to've departed. There's not much here. ")]
    [[:look :north]
-    (if (get-area-state :main :all-clear)
+    (if (get-game-state :all-clear)
       "You can see a hut over there."
       "It's too murky to see much over there.")]
    [[:look :south]
@@ -58,16 +59,18 @@
       "There are some merfolk milling around."
       "There's a big bunch of coral over there.")]
    [[:look :east]
-    (if (get-area-state :main :all-clear)
+    (if (get-game-state :all-clear)
       "There's a cave over that way."
       "It's too murky to see much over there.")]
+   [[:look :west]
+    "You see an inescapable cliff face. Best not to bother with."]
    [[:go :north]
-    (if (get-area-state :main :all-clear)
+    (if (get-game-state :all-clear)
       (move-player :wiz)
       "It's too murky to go that way right now.")]
    [[:go :south]
     (move-player :main)]
    [[:go :east]
-    (if (get-area-state :main :all-clear)
+    (if (get-game-state  :all-clear)
       (move-player :cave)
       "It's too murky to go that way right now.")]))
