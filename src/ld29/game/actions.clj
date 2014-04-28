@@ -77,7 +77,7 @@
                       (get-in state [:inventory] id)
                       (get-in state [:areas from :entities id]))
              ; remove the entity from the 'from' location
-             state ((remove-entity from id) state)
+             state ((remove-entity id from) state)
              ; add the entity to the 'to' location
              state (if to-inventory?
                      (assoc-in state [:inventory id] entity)
