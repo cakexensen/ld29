@@ -23,7 +23,7 @@
        (fn [state]
          (assoc-in state [:areas area :entities entity :state key] value))))
   ([entity key value]
-     (set-entity-state (current-area-id) entity key value)))
+     (set-entity-state entity (current-area-id) key value)))
 
 (defn set-area-state
   "sets a state value associated with a particular area"
@@ -39,10 +39,22 @@
   (fn [state]
     (assoc-in state [:state key] value)))
 
+(defn add-entity
+  "adds an entity to the game"
+  ([id entity-fn]
+     (add-entity id entity-fn (current-area-id)))
+  ([id entity-fn area]
+     (when-not (entity-at? id area)
+       (if (= area :inventory)
+         (fn [state]
+           (assoc-in state [:inventory id] (entity-fn)))
+         (fn [state]
+           (assoc-in state [:areas area :entities id] (entity-fn)))))))
+
 (defn remove-entity
   "removes an entity from the game"
   ([id]
-     (remove-entity (current-area-id) id))
+     (remove-entity id (current-area-id)))
   ([id area]
      (if (= area :inventory)
        (fn [state]
@@ -122,7 +134,7 @@
        (get-in *state* [:inventory entity :state key])
        (get-in *state* [:areas area :entities entity :state key])))
   ([entity key]
-     (get-entity-state (current-area-id) entity key)))
+     (get-entity-state entity (current-area-id) key)))
 
 (defn get-area-state
   "gets a state value associated with a particular area"
