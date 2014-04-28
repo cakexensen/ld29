@@ -11,9 +11,9 @@
    ""
    ""
    ""
-   ""
    "         Ludum Dare 29: beneath the surface"
-   "  by Dan & Tj Christensen (xensky and S1lv3rN3k0)"])
+   "  by Dan & Tj Christensen (xensky and S1lv3rN3k0)"
+   "     with music by frank Nora from freepd.com"])
 
 (defn render-title
   "renders the title art"
