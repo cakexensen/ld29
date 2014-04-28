@@ -56,4 +56,23 @@
 (defarea wiz
   "The hut of The Great Sea Wizard"
   [wizard]
-  (make-commands [[:look] "There is an old merman milling outside of a hut for no apparent reason. The merman sports a sagely beard and magic fedora. He is also rather flatulent."]))
+  (make-commands
+   [[:look] "There is an old merman milling outside of a hut for no apparent reason. The merman sports a sagely beard and magic fedora. He is also rather flatulent."]
+   [[:look :north]
+    "There's nothing interesting North of the wizard's hut."]
+   [[:look :east]
+    "There's nothing of particular interest to the East of the wizard's hut."]
+   [[:look :south]
+    (cond
+     (and (entity-at? :school :seahorse) (entity-at? :teenager :seahorse))
+     "You see that teenager that punched you hanging out with some seahorses."
+     (entity-at? :school :seahorse)
+     "You see seahorses milling about."
+     (entity-at? :teenager :seahorse)
+     "You see that teenager that punched you in the balls."
+     :else
+     "There's nothing much over there now that the seahorses left.")]
+   [[:look :west]
+    "The cliff face extends even further this way."]
+   [[:go :south]
+    (move-player :seahorse)]))

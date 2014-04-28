@@ -101,6 +101,10 @@
     (if (entity-at? :school :seahorse)
       "You see a school of seahorses that way."
       "There's not much over there now.")]
+   [[:look :north]
+    "Nothing much there."]
+   [[:look :east]
+    "There's not much there."]
    [[:go :south]
     (move-player :ship)]
    [[:go :west]
