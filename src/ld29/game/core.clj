@@ -1,7 +1,7 @@
 (ns ld29.game.core
   (:use [ld29.game.command]
         [ld29.game.dictionary]
-        [ld29.game.areas main seahorse ship shark up wiz cave])
+        [ld29.game.areas main seahorse ship shark wiz cave house in-ship tabernacle village])
   (:require [ld29.game.uis
              [title :as title]
              [game :as game]
@@ -20,7 +20,16 @@
    :animated-message "" ; the partially-animated portion of the message
    :animated-index 0 ; the animation index
    :state {} ; any global state values
-   :areas {:main (main) :seahorse (seahorse) :ship (ship)} ; all the areas in the game
+   :areas {:main (main)
+           :seahorse (seahorse)
+           :ship (ship)
+           :shark (shark)
+           :wiz (wiz)
+           :cave (cave)
+           :house (house)
+           :in-ship (in-ship)
+           :tabernacle (tabernacle)
+           :village (village)} ; all the areas in the game
    :location :main ; the current area id
    :inventory {} ; player's inventory of entities
    :dictionary (make-dictionary) ; dictionary shared throughout game
