@@ -30,9 +30,9 @@
    [[:look | :look :latrine] "There are plentiful weeds and slimy mosses covering all of the surfaces in here as well. They don't look like they'd be as easy to grab up though."
     (cond
      (and (get-area-state :door-opened) (entity-here? :school))
-     `(school-in-ship-door-opened)
+     (school-in-ship-door-opened)
      (entity-here? :school)
-     `(school-in-ship-door-closed)
+     (school-in-ship-door-closed)
      (and (get-area-state :door-opened) (entity-here? :toilet-brush))
      "All that's left in the latrine is the toilet brush."
      :else

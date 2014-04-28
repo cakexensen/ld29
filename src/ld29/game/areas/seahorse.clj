@@ -12,11 +12,11 @@
       :seahorse
       ["The seahorses scatter as you get closer. " (move-entity :school :ship)]
       :ship
-      `(school-by-ship)
+      (school-by-ship)
       :in-ship
       (if (get-area-state :door-opened)
-        `(school-in-ship-door-opened)
-        `(school-in-ship-door-closed)) 
+        (school-in-ship-door-opened)
+        (school-in-ship-door-closed)) 
       "They've already gone elsewhere. ")]
    [[:get :school]
     (if (entity-here? :school)

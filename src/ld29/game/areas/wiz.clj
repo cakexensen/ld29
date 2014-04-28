@@ -40,13 +40,13 @@
                    "\"I don't think I mentioned a favour, but since you're interested,\" *fart* \"take some slime from the sunken ship and spread it around the sharkman's hideout. He's been really getting on my nerves lately!\"")]
                  [[:ask :about :removing :gills | :ask :wizard :about :removing :gills]
                   (let [begged (get-entity-state :wizard :begged)]
-                    `(gill-removal-dialogue begged)
+                    (gill-removal-dialogue begged)
                     (set-entity-state :wizard :begged (inc begged)))]
                  [[:beg :about :removing :gills | :beg :wizard :about :removing :gills | :ask :nicely :about :removing :gills]
                   (let [begged (get-entity-state :wizard :begged)
                         ; inc begged more because you begged
                         begged (inc begged)]
-                    `(gill-removal-dialogue begged)
+                    (gill-removal-dialogue begged)
                     (set-entity-state :wizard :begged (inc begged)))])
   ; begged is a vague measure of how much begging the player has done
   ; it increases more when using words like "beg" instead of just "ask"
