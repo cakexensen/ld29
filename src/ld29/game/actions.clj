@@ -8,6 +8,7 @@
 
 (declare current-area)
 (declare current-area-id)
+(declare entity-at?)
 
 (defn message
   "appends to the next message in the game"
