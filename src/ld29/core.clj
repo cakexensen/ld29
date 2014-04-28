@@ -10,7 +10,7 @@
   (let [shared-state (atom nil)
         shared-inputs (atom nil)]
     ; start the gui and the game with access to the buffers
-    (run-gui shared-state shared-inputs "ludum dare 29" 800 480)
+    (run-gui shared-state shared-inputs "To The Depths!" 800 480)
     ; start game in separate thread; when it finishes shutdown thread agents
     @(future (run-game shared-state shared-inputs))
     (shutdown-agents)))
