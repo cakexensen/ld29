@@ -58,8 +58,8 @@
 
 (defn expand
   "expands a non-terminal symbol's rules"
-  [expand-symbol commands inputs symbols]
-  (let [expansions (get commands expand-symbol) ; get the symbol expansions
+  [expand-symbol commands dictionary inputs symbols]
+  (let [expansions (get (merge commands dictionary) expand-symbol) ; get the symbol expansions
         ; add the remaining symbols to each of the new expansions
         symbol-lists (map #(concat % symbols) expansions)
         ; group the inputs with the symbol lists
@@ -68,7 +68,7 @@
 
 (defn parse-command-grammar
   "parses an input against a specific rule"
-  [inputs symbols commands]
+  [inputs symbols commands dictionary]
   (let [top-input (first inputs)
         top-symbol (first symbols)
         no-inputs (empty? inputs)
@@ -81,18 +81,18 @@
      ; match - input and symbol are equal
      (= top-input top-symbol) [[(rest inputs) (rest symbols)]]
      ; expand - non-terminal symbol, get its expansions
-     (non-terminal? top-symbol) (expand top-symbol commands inputs (rest symbols))
+     (non-terminal? top-symbol) (expand top-symbol commands dictionary inputs (rest symbols))
      :else false)))
 
 (defn match-command
   "determines if an input matches a command's rules"
-  [inputs rule commands]
+  [inputs rule commands dictionary]
   (let [symbols [rule]] ; start symbol stack with the selected rule
     (loop [inputs-symbols [[inputs symbols]]] ; list of input-symbol pairs
       (if (empty? inputs-symbols) ; if no more pairs, didn't match
         false
         (let [[inputs symbols] (first inputs-symbols) ; get first pair
-              parsed (parse-command-grammar inputs symbols commands)] ; parse it
+              parsed (parse-command-grammar inputs symbols commands dictionary)] ; parse it
           (cond
            ; if coll, still more pairs to parse
            (coll? parsed) (recur (concat (rest inputs-symbols) parsed))
@@ -103,10 +103,10 @@
 
 (defn find-best-match
   "finds the best matching command for an input"
-  [inputs commands]
+  [inputs commands dictionary]
   (let [symbols (keys commands) ; check each symbol in commands
         ; find the first that matches the input (or nil if none)
-        match (first (filter #(match-command inputs % commands) symbols))]
+        match (first (filter #(match-command inputs % commands dictionary) symbols))]
     match))
 
 (defn entities->commands
@@ -135,7 +135,16 @@
             *state* state]
     ; include relevant namespaces to process the actions
     (use 'ld29.game.actions)
-    (use (symbol (str "ld29.game.areas." (name (:location state)))))
+    (use 'ld29.game.areas.cave)
+    (use 'ld29.game.areas.house)
+    (use 'ld29.game.areas.in-ship)
+    (use 'ld29.game.areas.main)
+    (use 'ld29.game.areas.seahorse)
+    (use 'ld29.game.areas.shark)
+    (use 'ld29.game.areas.ship)
+    (use 'ld29.game.areas.tabernacle)
+    (use 'ld29.game.areas.village)
+    (use 'ld29.game.areas.wiz)
     (let [; eval actions and convert any that need it
           actions (map eval actions)
           actions (flatten actions)
@@ -152,13 +161,16 @@
   (let [; reset the message before processing
         state (assoc-in state [:message] "")
         ; split the "input string" by spaces, and use lower case
-        inputs (clojure.string/split (clojure.string/lower-case input) #"\s")
+        inputs (-> input
+                   (clojure.string/trim)
+                   (clojure.string/lower-case)
+                   (clojure.string/split #"\s"))
         current-area (get areas location)
         ; match - commands -> id that matches input, or nil
         match #(find-best-match inputs
                                 ; combine command rules and dictionary
-                                (merge dictionary
-                                       (commands->dictionary %)))
+                                (commands->dictionary %)
+                                dictionary)
         ; find-match - commands -> command that matches input, or nil
         find-match (fn [commands] (first (filter #(= (:id %) (match commands))
                                                 commands)))

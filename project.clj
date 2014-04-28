@@ -10,5 +10,4 @@
   :repositories [["libgdx" "http://libgdx.badlogicgames.com/nightlies/maven/"]]
   :aot [ld29.gui.Game]
   :main ^:skip-aot ld29.core
-  :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :target-path "target/%s")
