@@ -25,13 +25,17 @@
 (defn process-state
   "transforms the game state based on previous state and inputs"
   [state inputs]
-  (let [state (process-inputs state inputs)
+  (let [state (if (:moving state)
+                ; moving doesn't auto-look as an action, so do it here
+                (do
+                  (-> state
+                      (assoc :moving false)
+                      (assoc :input "look")))
+                (process-inputs state inputs))
         input-available (not (empty? (:input state)))
         state (if input-available
                 (process-command state)
                 state)
-        state (animate-message state)
-        ; play music - just this one track throughout game
-        state (assoc-in state [:current-music] :ambient-b)]
+        state (animate-message state)]
     state))
 

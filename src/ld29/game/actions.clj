@@ -81,7 +81,7 @@
              ; add the entity to the 'to' location
              state (if to-inventory?
                      (assoc-in state [:inventory id] entity)
-                     (assoc-in state [:areas to :entities id]))]
+                     (assoc-in state [:areas to :entities id] entity))]
          state))))
 
 (defn move-player
@@ -90,7 +90,7 @@
   (fn [state]
     (-> state
         (assoc-in [:location] to)
-        (assoc-in [:input] "look"))))
+        (assoc-in [:moving] true))))
 
 (defn game-over
   "causes a game over"

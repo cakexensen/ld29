@@ -33,6 +33,7 @@
            :tabernacle (tabernacle)
            :village (village)} ; all the areas in the game
    :location :main ; the current area id
+   :moving false ; true when moving between areas
    :inventory {} ; player's inventory of entities
    :dictionary (make-dictionary) ; dictionary shared throughout game
    :unknown-command (fn [state]
