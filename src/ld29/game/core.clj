@@ -5,7 +5,8 @@
   (:require [ld29.game.uis
              [title :as title]
              [game :as game]
-             [game-over :as game-over]]))
+             [game-over :as game-over]
+             [intro :as intro]]))
 
 (defn new-game
   "creates a new game state"
@@ -13,7 +14,8 @@
   {:current-ui :title ; the current ui to use
    :uis {:title title/process-state
          :game game/process-state
-         :game-over game-over/process-state} ; all the uis in the game
+         :game-over game-over/process-state
+         :intro intro/process-state} ; all the uis in the game
    :partial-input [] ; the input the player is still typing
    :input "" ; the input after player hits enter
    :message "" ; the message to display on the screen

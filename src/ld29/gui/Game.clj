@@ -10,7 +10,8 @@
   (:require [ld29.gui.uis
              [title :as title]
              [game :as game]
-             [game-over :as game-over]])
+             [game-over :as game-over]
+             [intro :as intro]])
   (:use [ld29.gui.music]))
 
 (defn clear-screen
@@ -90,7 +91,8 @@
        :inputs shared-inputs
        :uis {:title title/render
              :game game/render
-             :game-over game-over/render}
+             :game-over game-over/render
+             :intro intro/render}
        :current-music (atom nil) ; the music currently playing
        :music-instance (atom nil) ; the Music object for the current music
        :musics {:ambient-b "ambient_b_eastern_thought.mp3"} ; music -> filename
