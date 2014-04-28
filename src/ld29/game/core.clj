@@ -33,6 +33,7 @@
            :tabernacle (tabernacle)
            :village (village)} ; all the areas in the game
    :location :main ; the current area id
+   :moving false ; true when moving between areas
    :inventory {} ; player's inventory of entities
    :commands (make-commands [[:look :backpack]
                              "This backpack is one of your favourite possessions. It is a deluxe starfish backpack with premium eel stitching. Current contents: "
