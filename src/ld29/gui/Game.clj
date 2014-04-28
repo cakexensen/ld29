@@ -30,10 +30,10 @@
     (when-not (= state-music @current-music)
       ; update current music identifier
       (swap! current-music (fn [_] state-music))
-      ; stop the current music if available
-      (kill-music @music-instance)
       ; get the new music
-      (let [music (new-music (get musics state-music))]
+      (let [music (if (nil? @music-instance)
+                    (new-music (get musics state-music))
+                    @music-instance)]
         ; update it in state
         (swap! music-instance (fn [_] music))
         ; play it
