@@ -26,11 +26,13 @@
 
 (defn school-in-ship-door-opened
   []
-  ["You grab your chin off of the floor as the last seahorse swirls down the toilet hole. Did they just intentionally flush themselves? You happen to notice a very sturdy-looking toilet brush in the latrine." (remove-entity :school)])
+  (if (entity-at? :toilet-brush :in-ship)
+    ["You grab your chin off of the floor as the last seahorse swirls down the toilet hole. Did they just intentionally flush themselves? You happen to notice a very sturdy-looking toilet brush in the latrine." (remove-entity :school)]
+    "You grab your chin off the floor as the last seahorse swirls down the toilet hole. Did they just intentionally flush themselves?")
 
-(defn school-in-ship-door-closed
-  []
-  "You see the seahorses gathering by a door on your left. Their insistent bubbles request its opening.")
+  (defn school-in-ship-door-closed
+    []
+    "You see the seahorses gathering by a door on your left. Their insistent bubbles request its opening."))
 
 (defn school-by-ship
   []

@@ -12,7 +12,7 @@
    [:school ["school" | "seahorses" | "school" "of" "seahorses" | "seahorse"]]
    [:seal ["seal" | "silly" "seal"]]
    [:open ["open" | :look "inside"]]
-   [:box ["box" | "cardboard" "box"]]]
+   [:box ["box" | "cardboard" "box"]]
    [:door ["door" | "portal" | "doorway"]]
    [:door-knob ["door" "knob" | "door" "handle" | "knob" | "handle"]]
    [:ship ["ship" | "sunken" "ship" | "ship" "ruin" | "sunken" "ship" "ruin" | "ship" "ruins" | "sunken" "ship" "ruins"]]

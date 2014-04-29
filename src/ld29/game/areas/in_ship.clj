@@ -8,16 +8,18 @@
 
 (defentity toilet-brush
   "A toilet brush"
-  (make-commands [[:look :toilet-brush]
-                  "This is an incredibly sturdy toilet brush. It could even be used as a weapon. "]
-                 [[:get :toilet-brush]
-                  (cond (entity-here? :toilet-brush)
-                    ["You snatch that brush up and weild it fiercely. You are a tiger, a lion, a... sea lion? The point is, it makes you feel pretty darn tough. "
-                     (move-entity :toilet-brush :inventory)]
-                    (entity-at? :toilet-brush :inventory)
-                    "You mean this toilet brush you have right here?"
-                    :else
-                    "What toilet brush?")]
+  (make-commands
+   [[:look :toilet-brush]
+    "This is an incredibly sturdy toilet brush. It could even be used as a weapon. "]
+   [[:get :toilet-brush]
+    (cond
+     (and (get-area-state :in-ship :door-opened) (entity-here? :toilet-brush))
+     ["You snatch that brush up and weild it fiercely. You are a tiger, a lion, a... sea lion? The point is, it makes you feel pretty darn tough. "
+      (move-entity :toilet-brush :inventory)]
+     (entity-at? :toilet-brush :inventory)
+     "You mean this toilet brush you have right here?"
+     :else
+     "What toilet brush?")]
                  ))
 
 
@@ -44,7 +46,7 @@
      "All that's left in the latrine is the toilet brush."
      (get-area-state :door-opened)
      "There is nothing left here")]
-   [[:open :door] "As you open the door the silly seahorses begin storming down the drain of the latrine you just accessed for them. "(set-area-state :door-opened true)]
+   [[:open :door] "As you open the door the silly seahorses begin storming down the drain of the latrine you just accessed for them. You happen to see a sturdy-looking toilet brush here."(set-area-state :door-opened true)]
    [[:leave | :leave :ship | :go | :go :west]
     (move-player :ship)]
    ))

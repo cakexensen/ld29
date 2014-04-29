@@ -38,7 +38,7 @@
                   (when ( entity-at? :school :seahorse)
                     "There is a school of seahorses to the north.")
                   (when (entity-here? :seal)
-                    "There is a slaphappy seal smiling stupidly.")
+                    "There is a slaphappy seal smiling stupidly. On a completely unrelated note, it seems a lot less murky around here.")
                   (when (entity-here? :thugs)
                     "There are a bunch of thugs hanging out here.")]
                  [[:look :north]
