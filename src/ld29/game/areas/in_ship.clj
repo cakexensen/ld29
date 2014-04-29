@@ -35,8 +35,8 @@
      (school-in-ship-door-opened)
      (entity-here? :school)
      (school-in-ship-door-closed)
-     (not (get-area-state :door-opened)
-     "There is a door off to one side.")
+     (not (get-area-state :door-opened))
+     "There is a door off to one side."
      (and (get-area-state :door-opened) (entity-here? :toilet-brush))
      "All that's left in the latrine is the toilet brush."
      :else
