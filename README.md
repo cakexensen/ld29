@@ -1,10 +1,12 @@
 # ld29
 
-A Clojure library designed to ... well, that part is up to you.
+An entry for Ludum Dare 29 (theme "beneath the surface") collaborated
+by Dan and Tj Christensen (xensky/danxensen and S1lv3rN3k0). Titled
+"To The Depths!", it is a magical tale of mermaids.
 
 ## Usage
 
-FIXME
+"lein run" the project, or download from https://mega.co.nz/#!zgJilDKR!gnFrAwjXeY0iJGf71Usv_D6q0FBJRiNgoeyxbqTc9uY
 
 ## License
 
