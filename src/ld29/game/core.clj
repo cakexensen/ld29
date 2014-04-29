@@ -37,7 +37,8 @@
    :inventory {} ; player's inventory of entities
    :commands (make-commands [[:look :backpack]
                              "This backpack is one of your favourite possessions. It is a deluxe starfish backpack with premium eel stitching. Current contents: "
-                             (list-inventory)])
+                             (list-inventory)]
+                            [[:help] "Basic commands are: look (just look for the current area, look thing for things and look direction for looking in a direction), go (generally the cardinal directions, in the case of buildings it's go building, leaving is leave, abscond, etc.), get (we really did try to include enough aliases for things, but alas), beat up is a fun one, talk (whatever you're talking to), ask (whatever you're asking about) "])
    :dictionary (make-dictionary) ; dictionary shared throughout game
    :unknown-command (fn [state]
                       (assoc-in state [:message]

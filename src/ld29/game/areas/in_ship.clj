@@ -35,6 +35,8 @@
      (school-in-ship-door-opened)
      (entity-here? :school)
      (school-in-ship-door-closed)
+     (not (get-area-state :door-opened)
+     "There is a door off to one side.")
      (and (get-area-state :door-opened) (entity-here? :toilet-brush))
      "All that's left in the latrine is the toilet brush."
      :else
@@ -46,7 +48,13 @@
      "All that's left in the latrine is the toilet brush."
      (get-area-state :door-opened)
      "There is nothing left here")]
-   [[:open :door] "As you open the door the silly seahorses begin storming down the drain of the latrine you just accessed for them. You happen to see a sturdy-looking toilet brush here."(set-area-state :door-opened true)]
+   [[:open :door]
+    (if (entity-here? :school)
+      ["As you open the door the silly seahorses begin storming down the drain of the latrine you just accessed for them. You happen to see a sturdy-looking toilet brush here."
+       (set-area-state :door-opened true)]
+      ["The door opens, revealing a latrine. You think if you had gone to the seahorses and tried to get them first, this would actually be a really fun scene."
+       (set-area-state :door-opened true)]
+      )]
    [[:leave | :leave :ship | :go | :go :west]
     (move-player :ship)]
    ))

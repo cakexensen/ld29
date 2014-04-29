@@ -30,7 +30,7 @@
    [:merfolk ["merfolk" | "merpeople"]]
    [:fin ["fin" | "fins" | "tail" | "tails" | "flipper" | "flippers"]]
    [:curse ["curse" | "hex"]]
-   [:top ["top" | "bikini" | "bikini" "top" | "swim" "top" | "shirt"]]
+   [:top ["top" | "bikini" | "bikini" "top" | "swim" "top" | "shirt" | "swimsuit" | "swimsuit" "top"]]
    [:teenager [:mermaid | "teen" :mermaid | "teenage" :mermaid | "kid" | "teenager" | "mer-teenager"]]
    [:clergyman [:mermaid | "clergy" :mermaid | "clergyman" :mermaid | "clergy" | "clergyman"]]
    [:north ["north" | "n"]]
