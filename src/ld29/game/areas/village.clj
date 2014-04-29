@@ -42,7 +42,7 @@
     "There are more homes in various styles. None of them stand out as a place you need to go."]
    [[:go :north]
     (move-player :house)]
-   [[:go :tabernacle]
+   [[:go :into :tabernacle]
     (move-player :tabernacle)]
    [[:go :east]
     (move-player :tabernacle)]

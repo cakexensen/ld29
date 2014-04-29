@@ -26,7 +26,7 @@
      (get-game-state :rescue)
      "\"Thank you for all of your help. If there's anything I can do for you, please let me know.\" "
      (and (get-game-state :top-recovered) (= (current-area-id) :cave))
-     ["\"Thank you for giving me my top back. Those thugs took my top and I was on my way to.. Oh, I have to go.\" She runs off, heading south." (move-entity :marlune :cave :house)]
+     ["\"Thank you for giving me my top back. Those thugs took my top and I was on my way to.. Oh, I have to go.\" She runs off, heading toward the cottage southwest of here." (move-entity :marlune :cave :house)]
      (get-game-state :top-recovered)
      "\"Thanks again for giving me my top back.\" "
      (get-entity-state :marlune :name-known)
