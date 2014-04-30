@@ -55,6 +55,9 @@
       (hide [])
       (render [delta]
         (clear-screen)
+        ; dispose previous stage, make new stage
+        (when-not (nil? @stage)
+          (.dispose @stage))
         (reset! stage (Stage.))
         ; play the music
         (play-music state)
